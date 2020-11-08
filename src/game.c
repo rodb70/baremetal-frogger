@@ -34,10 +34,10 @@ void drawString(int r, int c, char *str, unsigned short color)
 }
 
 //Checks to see if two objects collide
-int isCollision(int row1, int col1, int row2, int col2, int rowDiff, int colDiff)
+int IsCollision(int row1, int col1, int row2, int col2, int rowDiff, int colDiff)
 {
-    if( (row1 - row2 < rowDiff && row1 - row2 > -rowDiff)
-            && (col1 - col2 < colDiff && col1 - col2 > -colDiff) )
+    if(( row1 - row2 < rowDiff && row1 - row2 > -rowDiff ) &&
+       ( col1 - col2 < colDiff && col1 - col2 > -colDiff ))
     {
 
         return 1;

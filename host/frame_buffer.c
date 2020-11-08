@@ -11,7 +11,7 @@ typedef struct
     SDL_Renderer *renderer;
     SDL_Texture *texture;
     uint16_t tft_fb[ SCREENHEIGHT ][ SCREENWIDTH ];
-    uint16_t tft_fb1[ SCREENHEIGHT ][ SCREENWIDTH ];
+    uint16_t tft_fb1/*[ SCREENHEIGHT ]*/[ SCREENWIDTH ];
 
 } monitor_t;
 
@@ -91,11 +91,22 @@ int frame_buffer_switch(int offset)
 
 void drawRect(int row, int col, int height, int width, unsigned short color)
 {
-    for( int h = 0; h < height; h++ )
+    int endw = row + width;
+    int endh = col + height;
+    if( endw > SCREENWIDTH )
     {
-        for( int w = 0; w < width; w++ )
+        endw = SCREENWIDTH;
+    }
+    if( endh > SCREENHEIGHT )
+    {
+        endh = SCREENHEIGHT;
+    }
+
+    for( int h = col; h < endh; h++ )
+    {
+        for( int w = row; w < endw; w++ )
         {
-            m->tft_fb[ col + h ][ row + w ] = color;
+            m->tft_fb[ h ][ w ] = color;
         }
     }
 }
@@ -135,19 +146,35 @@ void drawImage3(int row, int col, int width, int height, const unsigned short *i
 
 void drawHorizontal(int row, int col, int width, unsigned int color)
 {
-    for( int r = 0; r < width; r++ )
+    int endw = row + width;
+    if( endw > SCREENWIDTH )
     {
-        m->tft_fb[ col ][ row + r ] = color;
+        endw = SCREENWIDTH;
+    }
+    for( int r = row; r < endw; r++ )
+    {
+        m->tft_fb[ col ][ r ] = color;
     }
 }
 
 void drawVertical(int row, int col, int height, int width, unsigned int color)
 {
-    for( int c = 0; c < height; c++ )
+    int endw = row + width;
+    int endh = col + height;
+    if( endw > SCREENWIDTH )
     {
-        for( int r = 0; r < width; r++ )
+        endw = SCREENWIDTH;
+    }
+    if( endh > SCREENHEIGHT )
+    {
+        endh = SCREENHEIGHT;
+    }
+
+    for( int c = col; c < endh; c++ )
+    {
+        for( int r = row; r < endw; r++ )
         {
-            m->tft_fb[ col + c ][ row + r ] = color;
+            m->tft_fb[ c ][ r ] = color;
         }
     }
 }

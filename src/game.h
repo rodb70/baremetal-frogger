@@ -15,6 +15,9 @@
 extern const unsigned char fontdata_6x8[12288];
 extern uint16_t *videoBuffer;
 
+#define FROG_START_ROW 115
+#define FROG_START_COL 140
+#define BACKGROUND_COLOR BLACK
 //******************************************************************************
 //Colors
 //******************************************************************************
@@ -61,7 +64,7 @@ typedef struct
     int lives;
     int oldrow;
     int oldcol;
-}FROG;
+} FROG;
 
 typedef struct
 {
@@ -71,7 +74,7 @@ typedef struct
     int oldcol;
     const uint16_t* image;
 
-}CROC;
+} CROC;
 
 typedef struct
 {
@@ -80,7 +83,7 @@ typedef struct
     int oldrow;
     int oldcol;
 
-}SNAKE;
+} SNAKE;
 
 typedef struct
 {
@@ -89,7 +92,7 @@ typedef struct
     int oldrow;
     int oldcol;
 
-}LOG;
+} LOG;
 
 typedef struct
 {
@@ -98,7 +101,7 @@ typedef struct
     int oldrow;
     int oldcol;
 
-}HOME;
+} HOME;
 
 
 
@@ -114,7 +117,7 @@ void drawString(int r, int c, char *str, unsigned short color);
 void waitForVblank(void);
 void fillinScreen(volatile unsigned short color);
 void drawImage3(int r, int c, int width, int height, const uint16_t* image);
-int isCollision(int row1, int col1, int row2, int col2, int rowDiff, int colDiff);
+int IsCollision(int row1, int col1, int row2, int col2, int rowDiff, int colDiff);
 void drawHollowRect(int r, int c, int width, int height, uint16_t color);
 void delay(int n);
 
