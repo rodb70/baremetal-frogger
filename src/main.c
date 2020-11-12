@@ -5,6 +5,7 @@
 #include "snake.h"
 #include "home.h"
 #include "frogger.h"
+#include "frog.h"
 #include "lose.h"
 #include "lo.h"
 #include "st.h"
@@ -235,20 +236,21 @@ int gameScreen(int seed)
             drawImage3( frogp->row, frogp->col, 20, 15, down );
 
             frogp->col += 5;
-            if( frogp->col >= ( SCREENHEIGHT - 15 ))
+            if( frogp->col > ( SCREENHEIGHT - ( FROG_HEIGHT * 2 )))
             {
-                frogp->col = SCREENHEIGHT - 15;
+                frogp->col = SCREENHEIGHT - ( FROG_HEIGHT * 2 );
             }
         }
 
         if( KEY_DOWN_NOW( BUTTON_RIGHT ) )
         {
-            if( frogp->row < SCREENWIDTH )
-            {
-                drawRect( frogp->oldrow, frogp->oldcol, 20, 17, BACKGROUND_COLOR );
-                drawImage3( frogp->row, frogp->col, 20, 15, right );
+            drawRect( frogp->oldrow, frogp->oldcol, 20, 17, BACKGROUND_COLOR );
+            drawImage3( frogp->row, frogp->col, 20, 15, right );
 
-                frogp->row += 2;
+            frogp->row += 2;
+            if( frogp->row > ( SCREENWIDTH - ( FROG_WIDTH * 2 ) ))
+            {
+                frogp->row = SCREENWIDTH - ( FROG_WIDTH * 2 );
             }
         }
 

@@ -11,7 +11,6 @@ typedef struct
     SDL_Renderer *renderer;
     SDL_Texture *texture;
     uint16_t tft_fb[ SCREENHEIGHT ][ SCREENWIDTH ];
-    uint16_t tft_fb1/*[ SCREENHEIGHT ]*/[ SCREENWIDTH ];
 
 } monitor_t;
 
